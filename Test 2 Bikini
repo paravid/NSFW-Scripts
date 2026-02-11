@@ -1,0 +1,84 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+if _G.__MORPH_ACTIVE then return end
+_G.__MORPH_ACTIVE = true
+local URL = "https://github.com/paravid/RBMX-SCRIPTS/raw/refs/heads/main/Morphs.rbxm"
+local FILE = "Morphs.rbxm"
+local MORPH = "Test2Bikini"
+local getAsset = customasset or getcustomasset or getsynasset
+if not getAsset then return end
+
+if not isfile(FILE) then
+	writefile(FILE, game:HttpGet(URL))
+end
+
+local asset = game:GetObjects(getAsset(FILE))[1]
+if not asset then return end
+
+local newChar = asset:FindFirstChild(MORPH, true)
+if not newChar then return end
+
+local oldChar = player.Character or player.CharacterAdded:Wait()
+local oldHum = oldChar:WaitForChild("Humanoid")
+local oldRoot = oldChar:WaitForChild("HumanoidRootPart")
+
+local rig = newChar:Clone()
+rig.Name = player.Name
+player.Character = rig
+rig.Parent = workspace
+
+local rigRoot = rig:WaitForChild("HumanoidRootPart")
+rigRoot.CFrame = oldRoot.CFrame
+
+local newHum = rig:WaitForChild("Humanoid")
+workspace.CurrentCamera.CameraSubject = newHum
+
+for _,v in ipairs(oldChar:GetDescendants()) do
+	if v:IsA("BasePart") then
+		v.Transparency = 1
+		v.CanCollide = false
+	elseif v:IsA("Decal") then
+		v.Transparency = 1
+	end
+end
+
+local animate = rig:FindFirstChild("Animate")
+if animate then
+	animate.Disabled = false
+end
+
+for _,v in ipairs(rig:GetChildren()) do
+	if v:IsA("LocalScript") and v.Name == "Animate" then
+		v:Destroy()
+	end
+end
+
+local oldAnimate = oldChar:FindFirstChild("Animate")
+if oldAnimate then
+	oldAnimate:Clone().Parent = rig
+end
+
+newHum:ChangeState(Enum.HumanoidStateType.Physics)
+task.wait()
+newHum:ChangeState(Enum.HumanoidStateType.Running)
+
+local animate = rig:FindFirstChild("Animate")
+if animate then
+	animate.Disabled = true
+	task.wait()
+	animate.Disabled = false
+end
+
+newHum.AutoRotate = true
+newHum.WalkSpeed = 16
+newHum.JumpPower = 50
+
+local currentRig = rig
+player.CharacterAdded:Connect(function(newChar)
+	if currentRig and currentRig.Parent then
+		currentRig:Destroy()
+	end
+
+	player.Character = newChar
+	_G.__MORPH_ACTIVE = false
+end)
