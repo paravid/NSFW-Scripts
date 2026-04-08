@@ -1,0 +1,147 @@
+local canCollide = ...
+
+local model = Instance.new("Model")
+
+local basePart = Instance.new("Part")
+basePart.CanCollide = canCollide
+basePart.CanTouch = false
+basePart.CanQuery = false
+basePart.Massless = true
+
+local pants = Instance.new("Decal")
+pants.Name = "Pants"
+
+local shirt = Instance.new("Decal")
+shirt.Name = "Shirt"
+
+local invisible = basePart:Clone()
+invisible.Transparency = 1
+
+local leftHolder1 = invisible:Clone()
+leftHolder1.Name = "LA"
+leftHolder1.Size = Vector3.new(1,2,1)
+leftHolder1.CFrame = CFrame.new(-0.45,1.02,0.04)
+leftHolder1.Parent = model
+
+local leftArm = basePart:Clone()
+leftArm.Name = "Left Arm"
+leftArm.Size = Vector3.new(1.041,2.258,1.109)
+leftArm.CFrame = CFrame.new(-0.45,1.12,0.08) * CFrame.Angles(0,0,math.rad(180))
+leftArm.Parent = leftHolder
+
+shirt:Clone().Parent = leftArm
+
+local meshL = Instance.new("SpecialMesh")
+meshL.MeshId = "rbxassetid://8835551103"
+meshL.Parent = leftArm
+
+local motorL = Instance.new("Motor6D")
+motorL.C0 = CFrame.new(0,-0.105,0.035) * CFrame.Angles(0,0,math.rad(180))
+motorL.Part0 = leftArm
+motorL.Part1 = leftHolder
+motorL.Parent = leftArm
+
+local leftHolder2 = invisible:Clone()
+leftHolder2.Name = "RA"
+leftHolder2.Size = Vector3.new(1,2,1)
+leftHolder2.CFrame = CFrame.new(-0.45,1.02,0.04)
+leftHolder2.Parent = model
+
+local rightArm = basePart:Clone()
+rightArm.Name = "Right Arm"
+rightArm.Size = Vector3.new(1.041,2.258,1.109)
+rightArm.CFrame = CFrame.new(-0.45,1.12,0.08) * CFrame.Angles(0,0,math.rad(180))
+rightArm.Parent = leftHolder
+
+shirt:Clone().Parent = rightArm
+
+local meshR = Instance.new("SpecialMesh")
+meshR.MeshId = "rbxassetid://8835552596"
+meshR.Parent = rightArm
+
+local motorL = Instance.new("Motor6D")
+motorL.C0 = CFrame.new(0,-0.105,0.035) * CFrame.Angles(0,0,math.rad(180))
+motorL.Part0 = leftArm
+motorL.Part1 = leftHolder
+motorL.Parent = leftArm
+
+local leftHolder = invisible:Clone()
+leftHolder.Name = "L"
+leftHolder.Size = Vector3.new(1,2,1)
+leftHolder.CFrame = CFrame.new(-0.45,1.02,0.04)
+leftHolder.Parent = model
+
+local leftLeg = basePart:Clone()
+leftLeg.Name = "Left Leg"
+leftLeg.Size = Vector3.new(1.041,2.258,1.109)
+leftLeg.CFrame = CFrame.new(-0.45,1.12,0.08) * CFrame.Angles(0,0,math.rad(180))
+leftLeg.Parent = leftHolder
+
+pants:Clone().Parent = leftLeg
+
+local meshL = Instance.new("SpecialMesh")
+meshL.MeshId = "rbxassetid://8815909538"
+meshL.Parent = leftLeg
+
+local motorL = Instance.new("Motor6D")
+motorL.C0 = CFrame.new(0,-0.105,0.035) * CFrame.Angles(0,0,math.rad(180))
+motorL.Part0 = leftLeg
+motorL.Part1 = leftHolder
+motorL.Parent = leftLeg
+
+local rightHolder = invisible:Clone()
+rightHolder.Name = "R"
+rightHolder.Size = Vector3.new(1,2,1)
+rightHolder.CFrame = CFrame.new(0.54,1.02,0.04)
+rightHolder.Parent = model
+
+local rightLeg = basePart:Clone()
+rightLeg.Name = "Right Leg"
+rightLeg.Size = Vector3.new(1.041,2.258,1.109)
+rightLeg.CFrame = CFrame.new(0.56,1.12,0.08) * CFrame.Angles(0,0,math.rad(180))
+rightLeg.Parent = rightHolder
+
+pants:Clone().Parent = rightLeg
+
+local meshR = Instance.new("SpecialMesh")
+meshR.MeshId = "rbxassetid://8815913223"
+meshR.Parent = rightLeg
+
+local motorR = Instance.new("Motor6D")
+motorR.C0 = CFrame.new(0.018,-0.105,0.038) * CFrame.Angles(0,0,math.rad(180))
+motorR.Part0 = rightLeg
+motorR.Part1 = rightHolder
+motorR.Parent = rightLeg
+
+local torsoHolder = invisible:Clone()
+torsoHolder.Name = "T"
+torsoHolder.Size = Vector3.new(2,2,1)
+torsoHolder.CFrame = CFrame.new(0.04,3.02,0.04)
+torsoHolder.Parent = model
+
+local torso = basePart:Clone()
+torso.Name = "Torso"
+torso.Size = Vector3.new(1.79,1.99,1.15)
+torso.CFrame = torsoHolder.CFrame
+torso.Parent = torsoHolder
+
+local torsoMesh = Instance.new("SpecialMesh")
+torsoMesh.MeshId = "rbxassetid://8816094443"
+torsoMesh.Scale = Vector3.new(1.12,1,1)
+torsoMesh.Parent = torso
+
+local chestPart = basePart:Clone()
+chestPart.Name = "BRSTVisual"
+chestPart.Size = Vector3.new(1.79,1.11,1.29)
+chestPart.CFrame = CFrame.new(0.06,3.43,-0.5)
+chestPart.Parent = torso
+
+local chestMesh = Instance.new("SpecialMesh")
+chestMesh.MeshId = "rbxassetid://9687448799"
+chestMesh.Scale = Vector3.new(0.99,1.04,0.93)
+chestMesh.Parent = chestPart
+
+pants:Clone().Parent = torso
+shirt:Clone().Parent = torso
+
+return model
