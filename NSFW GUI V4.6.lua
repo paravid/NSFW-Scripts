@@ -29,7 +29,7 @@ end)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/paravid/Script/refs/heads/main/Animator%206D%20Pro%20V4"))()
 
 local request = syn and syn.request or http_request or request
-local res1 = request({Url = "https://github.com/paravid/RBMX-SCRIPTS/raw/refs/heads/main/UPATE.rbxm", Method = "GET"})
+local res1 = request({Url = "https://github.com/paravid/NSFW-Scripts/raw/refs/heads/main/UPATE.rbxm", Method = "GET"})
 assert(res1 and res1.Body)
 writefile("UPATE.rbxm", res1.Body)
 
