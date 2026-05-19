@@ -1,6 +1,6 @@
 --[[ 
 
-Name: NSFW GUI V4.6
+Name: NSFW GUI V4.7
 Description: Time To Fuck!
 By: Kanujinho
 
@@ -25,8 +25,6 @@ Player.CharacterAdded:Connect(function(char)
 	Root = char:WaitForChild("HumanoidRootPart")
 	Head = char:WaitForChild("Head")
 end)
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/paravid/Script/refs/heads/main/Animator%206D%20Pro%20V4"))()
 
 local request = syn and syn.request or http_request or request
 local res1 = request({Url = "https://github.com/paravid/RBMX-SCRIPTS/raw/refs/heads/main/UPATE.rbxm", Method = "GET"})
